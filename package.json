@@ -1,0 +1,33 @@
+{
+    "name": "enttec-usb-pro-driver",
+    "version": "1.0.0",
+    "description": "This is a npm/yarn/pnpm package, which allows a fast and uncomplicated communication with any enttec-usb-pro device.",
+    "keywords": [
+        "dmx",
+        "enttec",
+        "usb"
+    ],
+    "homepage": "https://github.com/CyberHD1811/enttec-usb-pro-driver",
+    "bugs": {
+        "url": "https://github.com/CyberHD1811/enttec-usb-pro-driver/issues"
+    },
+    "license": "MIT",
+    "main": "src/index.js",
+    "repository": "https://github.com/CyberHD1811/enttec-usb-pro-driver",
+    "dependencies": {
+        "events": "^3.3.0",
+        "serialport": "^10.4.0"
+    },
+    "engines": {
+        "node": ">=16.17.1"
+    },
+    "private": false,
+    "author": {
+        "name": "CyberHD1811",
+        "url": "https://github.com/CyberHD1811"
+    },
+    "prettier": {
+        "singleQuote": true,
+        "tabWidth": 4
+    }
+}
