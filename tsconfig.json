@@ -1,0 +1,65 @@
+{
+    "compilerOptions": {
+        // * Type Checking
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "alwaysStrict": true,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+        "strictBindCallApply": true,
+        "strictFunctionTypes": true,
+        "strictNullChecks": true,
+        "strictPropertyInitialization": true,
+        "useUnknownInCatchVariables": true,
+
+        // * Modules
+        "allowUmdGlobalAccess": false, // Not sure if this is needed
+        "baseUrl": "./",
+        "module": "ES2020",
+        "moduleResolution": "Node",
+        "noResolve": false,
+        "resolveJsonModule": true,
+        "rootDir": "./src/",
+
+        // * Emit
+        "declaration": false,
+        "importsNotUsedAsValues": "remove",
+        "noEmitOnError": true,
+        "outDir": "./lib/",
+        "removeComments": false,
+        "stripInternal": true,
+
+        // * Interop Constraints
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+
+        // * Out
+        "suppressExcessPropertyErrors": true,
+        "suppressImplicitAnyIndexErrors": true, // May be deactivated, if it is too hard... could use @ts-ignore for similar behaviour
+
+        // * Language And Enviroment"
+        "lib": ["ES2020"],
+        "moduleDetection": "force",
+        "target": "ES2020",
+
+        // * Compiler Diagnostics
+        "explainFiles": true, // May be deactivated if build logs are overblown
+        "extendedDiagnostics": true,
+        "listEmittedFiles": true,
+
+        // * Output Formatting
+        "noErrorTruncation": true,
+        "pretty": true
+    },
+    "include": ["src/**/*"]
+}

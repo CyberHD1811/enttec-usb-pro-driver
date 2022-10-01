@@ -1,3 +1,3 @@
 import DMXInterface from './DMXInterface';
 
-export { DMXInterface };
+export default { DMXInterface };
