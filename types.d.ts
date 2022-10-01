@@ -25,23 +25,23 @@ export declare class DMXInterface {
     /**
      * @description Private attribute for the internal Interval.
      */
-    #interval: NodeJS.Timer | null;
+    private interval: NodeJS.Timer | null;
     /**
      * @description Private attribute for the internal Interval speed * the dmxSpeed specified by the user.
      */
-    #intervalSpeed: number;
+    private intervalSpeed: number;
     /**
      * @description Private attribute for the serialport instance used for the dmx interface specified by the path constructor parameter.
      */
-    #serialPort: SerialPort;
+    private serialPort: SerialPort;
     /**
      * @description Private attribute for the dmx universe Buffer.
      */
-    #universe: Buffer;
+    private universe: Buffer;
     /**
      * @description Private attribute to show if the interface is ready to be used for another bit-request or if any other method uses is currently.
      */
-    #used: boolean;
+    private used: boolean;
 
     /**
      * @classdesc Creates an Instance of any Enttec USB Pro DMX Device to the specified path.
@@ -59,7 +59,7 @@ export declare class DMXInterface {
         path: string;
     });
 
-    #sendUniverseToSerial: () => void;
+    private sendUniverseToSerial: () => void;
     blackout: () => void;
     fullon: () => void;
     start: () => void;

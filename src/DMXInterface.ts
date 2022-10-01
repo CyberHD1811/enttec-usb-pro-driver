@@ -29,23 +29,23 @@ export default class DMXInterface {
     /**
      * @description Private attribute for the internal Interval.
      */
-    #interval: NodeJS.Timer | null;
+    private interval: NodeJS.Timer | null;
     /**
      * @description Private attribute for the internal Interval speed * the dmxSpeed specified by the user.
      */
-    #intervalSpeed: number;
+    private intervalSpeed: number;
     /**
      * @description Private attribute for the serialport instance used for the dmx interface specified by the path constructor parameter.
      */
-    #serialPort: SerialPort;
+    private serialPort: SerialPort;
     /**
      * @description Private attribute for the dmx universe Buffer.
      */
-    #universe: Buffer;
+    private universe: Buffer;
     /**
      * @description Private attribute to show if the interface is ready to be used for another bit-request or if any other method uses is currently.
      */
-    #used: boolean;
+    private used: boolean;
 
     /**
      * @classdesc Creates an Instance of any Enttec USB Pro DMX Device to the specified path.
@@ -62,12 +62,12 @@ export default class DMXInterface {
         dmxSpeed?: number | undefined;
         path: string;
     }) {
-        this.#interval = null;
-        this.#intervalSpeed = 1000 / dmxSpeed;
-        this.#universe = Buffer.alloc(513, 0);
-        this.#used = false;
+        this.interval = null;
+        this.intervalSpeed = 1000 / dmxSpeed;
+        this.universe = Buffer.alloc(513, 0);
+        this.used = false;
 
-        this.#serialPort = new SerialPort(
+        this.serialPort = new SerialPort(
             {
                 baudRate: 250000,
                 dataBits: 8,
@@ -84,29 +84,29 @@ export default class DMXInterface {
     }
 
     // * Private Methods
-    #sendUniverseToSerial = (): void => {
-        if (!this.#serialPort.writable || this.#used) return;
+    private sendUniverseToSerial = (): void => {
+        if (!this.serialPort.writable || this.used) return;
 
         const Hdr = Buffer.from([
             this.ENTTEC_PRO_MESSAGE_START,
             this.ENTTEC_PRO_REQUEST,
-            this.#universe.length & 0xff,
-            (this.#universe.length >> 8) & 0xff,
+            this.universe.length & 0xff,
+            (this.universe.length >> 8) & 0xff,
             this.ENTTEC_PRO_STARTCODE,
         ]);
 
         const DMXBuffer = Buffer.concat([
             Hdr,
-            this.#universe.subarray(1),
+            this.universe.subarray(1),
             Buffer.from([this.ENTTEC_PRO_MESSAGE_END]),
         ]);
 
-        this.#used = true;
-        this.#serialPort.write(DMXBuffer);
-        this.#serialPort.drain((err) => {
+        this.used = true;
+        this.serialPort.write(DMXBuffer);
+        this.serialPort.drain((err) => {
             if (err) throw err;
 
-            this.#used = false;
+            this.used = false;
         });
     };
 
@@ -120,18 +120,18 @@ export default class DMXInterface {
     };
 
     public start = (): void => {
-        if (this.#interval === null) {
-            this.#interval = setInterval(
-                this.#sendUniverseToSerial.bind(this),
-                this.#intervalSpeed
+        if (this.interval === null) {
+            this.interval = setInterval(
+                this.sendUniverseToSerial.bind(this),
+                this.intervalSpeed
             );
         }
     };
 
     public stop = (): void => {
-        if (this.#interval !== null) {
-            clearInterval(this.#interval);
-            this.#interval = null;
+        if (this.interval !== null) {
+            clearInterval(this.interval);
+            this.interval = null;
         }
     };
 
@@ -143,7 +143,7 @@ export default class DMXInterface {
         }
 
         for (let i = 0; i < 513; i++) {
-            this.#universe[i] = value;
+            this.universe[i] = value;
         }
     };
 
@@ -160,7 +160,7 @@ export default class DMXInterface {
             );
         }
 
-        this.#universe[channel] = value;
+        this.universe[channel] = value;
     };
 
     public updateChannels = (channelValuePairs: [number, number][]): void => {
@@ -177,7 +177,7 @@ export default class DMXInterface {
                 );
             }
 
-            this.#universe[channel] = value;
+            this.universe[channel] = value;
         }
     };
 }
