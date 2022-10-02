@@ -1,6 +1,6 @@
 {
     "name": "enttec-usb-pro-driver",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "description": "This is a npm/yarn/pnpm package, which allows a fast and uncomplicated communication with any enttec-usb-pro device.",
     "keywords": [
         "dmx",
